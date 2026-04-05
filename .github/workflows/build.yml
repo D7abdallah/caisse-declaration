@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v4 # تحديث للنسخة 4
 
       - name: Set up Python 3.9 (32-bit)
-        uses: actions/setup-python@v5 # تحديث للنسخة 5
+        uses: actions/setup-python@v4 # تحديث للنسخة 5
         with:
           python-version: '3.9'
           architecture: 'x86'
@@ -18,7 +18,7 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build EXE
-        run: pyinstaller --noconsole --onefile --clean --icon="calc-app-/logo.ico" "calc-app-/Calc-app.py"
+        run: pyinstaller --noconsole --onefile --clean --icon="calc-app-/logo.ico" "Calc-app.py"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4 # هذا هو التغيير المهم (v4 بدل v3)
