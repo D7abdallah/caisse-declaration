@@ -1,0 +1,28 @@
+name: Build EXE 32bit
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.9 (32-bit)
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          architecture: 'x86'
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build EXE
+        # لاحظ هنا استخدمنا مسار الملف الصحيح داخل مجلد calc-app-
+        run: pyinstaller --noconsole --onefile --clean --icon="calc-app-/logo.ico" "calc-app-/Calc-app.py"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Caisse-Pro-32bit
+          path: dist/Calc-app.exe
